@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Website By Juang</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<audio id="bgMusic" src="https://feeldreams.github.io/audio/foreveryoung.mp3" loop></audio>
+<!-- Popup 1 -->
+<div class="popup" id="popup1">
+  <div class="popup-content">
+    <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExYWw3MWFxbGM1aXRzN2swbWdsc3l0anprNXZwaTBhMGxjMDl1N3N3cCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/kSxi9DiWH4Q8q1Kbql/giphy.gif" class="popup-gif">
+    <div class="popup-text">haii cantikk,klikk dongg!</div>
+    <button class="popup-btn" id="startBtn" onclick="startSequence()">
+      <img src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png" alt="Next">
+    </button>
+  </div>
+</div>
+
+<!-- Popup 2-->
+<div class="popup-2 popup-next" id="popup2">
+  <div class="popup-2-content">
+    <img src="https://media1.tenor.com/m/nDp-K4NXOS4AAAAC/%D0%B3%D0%BE%D0%B4%D0%B6%D0%BE.gif" class="popup-2-gif">
+    <div class="popup-2-text">kok kamu makin hari makin cantik yakkk🥰</div>
+    <div class="progress-bar"><div class="progress-fill"></div></div>
+  </div>
+</div>
+<!-- PopUp 3 -->
+<div class="popup-2 popup-next" id="popup3">
+  <div class="popup-2-content">
+    <img src="https://media.tenor.com/hW_mTYy_zS4AAAAj/gojo-satoru.gif" class="popup-2-gif">
+    <div class="popup-2-text">btw aku mau nanya sesuatuu 😆</div>
+    <div class="progress-bar"><div class="progress-fill"></div></div>
+  </div>
+</div>
+
+<div class="popup-2 popup-next" id="popup4">
+  <div class="popup-2-content">
+    <img src="https://media.tenor.com/bkA2JqxxfGwAAAAi/mlbb-jjk-jjk-mlbb.gif" class="popup-2-gif">
+    <div class="popup-2-text">hmmm? 🎀</div>
+    <div class="progress-bar"><div class="progress-fill"></div></div>
+  </div>
+</div>
+
+<!-- Last PopUp -->
+<div class="popup-2 popup-final" id="popup6">
+  <div class="popup-2-content">
+    <img src="https://media.tenor.com/lKfFq47N6LYAAAAi/gojo-yuji-transparent-gojo.gif" class="popup-2-gif">
+    <div class="popup-2-text">Mau ga jadi pacarkuu?? 🥰</div>
+
+    <div class="button-group">
+  <button class="final-btn mau-btn" onclick="window.location.href='https://example.com/page1'">
+    mauuu 😻
+  </button>
+  <button class="final-btn ngga-btn" id="nggaBtn">
+    ngga 🙀
+  </button>
+</div>
+
+  </div>
+</div>
+
+<header class="footer">
+  <p>© Web Ini Dibuat Oleh : Juang</p>
+</header>
+<script>
+function startSequence() {
+  document.getElementById('popup1').classList.add('hide');
+  setTimeout(() => {
+    document.getElementById('popup1').style.display = 'none';
+    showPopupWithProgress('popup2', () => {
+      showPopupWithProgress('popup3', () => {
+        showPopupWithProgress('popup4', () => {
+            document.getElementById('popup6').style.display = 'flex';
+            setupNggaButton();
+        });
+      });
+    });
+  }, 500);
+}
+
+function showPopupWithProgress(id, callback) {
+  const popup = document.getElementById(id);
+  popup.style.display = 'flex';
+  popup.classList.add('slide-down');
+
+  let progress = 0;
+  const duration = 5000; // 3 detik
+  const interval = 30;
+  const step = 100 / (duration / interval);
+  const fill = popup.querySelector('.progress-fill');
+
+  const timer = setInterval(() => {
+    progress += step;
+    if (fill) fill.style.width = progress + '%';
+
+    if (progress >= 100) {
+      clearInterval(timer);
+      popup.style.display = 'none';
+      callback();
+    }
+  }, interval);
+}
+
+// Fungsi agar tombol "ngga" kabur saat disentuh
+function setupNggaButton() {
+  const nggaBtn = document.getElementById('nggaBtn');
+  let clickCount = 0;
+
+  nggaBtn.addEventListener('click', () => {
+    clickCount++;
+
+    if (clickCount === 1) {
+      nggaBtn.textContent = 'harus iya 😤';
+    } else if (clickCount === 2) {
+      nggaBtn.textContent = 'iya gak 🤬';
+    } else if (clickCount === 3) {
+      nggaBtn.style.display = 'none';
+    }
+  });
+}
+
+</script>
+<script>
+  document.getElementById('startBtn').addEventListener('click', () => {
+  const audio = document.getElementById('bgMusic');
+  audio.play().catch(err => console.log("Autoplay diblokir: ", err));
+
+  startSequence(); // jalankan kelanjutan animasi popup
+});
+
+</script>
+
+</body>
+</html>
